@@ -1,69 +1,31 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import {
-  Button,
-  FlatList,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
+import GoalItem from "./components/GoalItem";
+import GoalInput from "./components/GoalInput";
 
 export default function App() {
-  const [goalInput, setGoalInput] = useState("");
   const [goals, setGoals] = useState([]);
-  const removeGoal = (index) => {
-    console.log(index);
+  const deleteItem = (id) => {
+    setGoals((currentGoals) => {
+      return currentGoals.filter((goal) => goal.id !== id);
+    });
   };
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          flexDirection: "column",
-          borderBottomWidth: 0.7,
-          paddingVertical: 20,
-        }}
-      >
-        <TextInput
-          style={{
-            padding: 10,
-            marginBottom: 20,
-            borderWidth: 0.7,
-            borderRadius: 7,
-          }}
-          placeholder="Your Course goals"
-          onChangeText={(text) => setGoalInput(text)}
-        />
-        <Button
-          title="Add Goal"
-          onPress={() =>
-            setGoals((currentGoals) => [
-              ...currentGoals,
-              { text: goalInput, id: Math.random().toString() },
-            ])
-          }
-        />
-      </View>
+      <GoalInput setGoals={setGoals} />
       <FlatList
         data={goals}
         renderItem={(itemData) => {
           return (
-            <View
-              key={itemData.index}
-              style={{
-                marginVertical: 8,
-                padding: 8,
-                borderRadius: 6,
-                backgroundColor: "#5e0acc",
-              }}
-              onPress={removeGoal}
-            >
-              <Text style={{ color: "white" }}>{itemData.item.text}</Text>
-            </View>
+            <GoalItem
+              text={itemData.item.text}
+              id={itemData.item.id}
+              onDeleteItem={deleteItem}
+            />
           );
         }}
-        keyExtractor={(item, index) => {
+        keyExtractor={(item) => {
           return item.id;
         }}
         style={{ marginTop: 40 }}
@@ -75,8 +37,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     padding: 50,
-  },
-  goalContainer: {
-    flexDirection: "row",
   },
 });
