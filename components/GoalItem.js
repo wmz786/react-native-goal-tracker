@@ -3,18 +3,21 @@ import React from "react";
 
 const GoalItem = ({ text, id, onDeleteItem }) => {
   return (
-    <Pressable onPress={onDeleteItem.bind(this, id)}>
-      <View
-        style={{
-          marginVertical: 8,
-          padding: 8,
-          borderRadius: 6,
-          backgroundColor: "#5e0acc",
-        }}
+    <View
+      style={{
+        marginVertical: 8,
+        borderRadius: 6,
+        backgroundColor: "#5e0acc",
+      }}
+    >
+      <Pressable
+        android_ripple={{ color: "#210644" }}
+        onPress={onDeleteItem.bind(this, id)}
+        style={({ pressed }) => pressed && { opacity: 0.5 }}
       >
-        <Text style={{ color: "white" }}>{text}</Text>
-      </View>
-    </Pressable>
+        <Text style={{ color: "white", padding: 9 }}>{text}</Text>
+      </Pressable>
+    </View>
   );
 };
 
