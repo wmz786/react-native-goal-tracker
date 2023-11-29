@@ -1,4 +1,11 @@
-import { Button, Modal, StyleSheet, TextInput, View } from "react-native";
+import {
+  Button,
+  Image,
+  Modal,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 import React, { useState } from "react";
 
 const GoalInput = ({ visible, onCancel, addGoalHandler }) => {
@@ -10,24 +17,40 @@ const GoalInput = ({ visible, onCancel, addGoalHandler }) => {
         style={{
           flex: 1,
           justifyContent: "center",
-          flexDirection: "column",
-          borderBottomWidth: 0.7,
-          paddingVertical: 20,
-          marginHorizontal: 20,
+          alignItems: "center",
+          padding: 16,
+          backgroundColor: "#311b6b",
         }}
       >
+        <Image
+          source={require("../assets/images/goal.png")}
+          style={{
+            width: 100,
+            height: 100,
+            margin: 20,
+          }}
+        />
         <TextInput
           style={{
-            padding: 10,
-            marginBottom: 20,
-            borderWidth: 0.7,
-            borderRadius: 7,
+            borderWidth: 1,
+            borderColor: "#e4d0ff",
+            backgroundColor: "#e4d0ff",
+            color: "#120438",
+            borderRadius: 6,
+            width: "100%",
+            padding: 16,
           }}
           placeholder="Your Course goals"
           onChangeText={(text) => setGoalInput(text)}
           value={goalInput}
         />
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            marginTop: 20,
+          }}
+        >
           <View style={{ marginRight: 10 }}>
             <Button
               title="Add Goal"

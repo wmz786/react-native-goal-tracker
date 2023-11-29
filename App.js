@@ -20,30 +20,33 @@ export default function App() {
     });
   };
   return (
-    <View style={styles.container}>
-      <Button title="Add Goal" onPress={() => setModalVisible(true)} />
-      <GoalInput
-        addGoalHandler={addGoalHandler}
-        onCancel={() => setModalVisible(false)}
-        visible={modalVisible}
-      />
-      <FlatList
-        data={goals}
-        renderItem={(itemData) => {
-          return (
-            <GoalItem
-              text={itemData.item.text}
-              id={itemData.item.id}
-              onDeleteItem={deleteItem}
-            />
-          );
-        }}
-        keyExtractor={(item) => {
-          return item.id;
-        }}
-        style={{ marginTop: 40 }}
-      />
-    </View>
+    <>
+      <StatusBar style="light" />
+      <View style={styles.container}>
+        <Button title="Add Goal" onPress={() => setModalVisible(true)} />
+        <GoalInput
+          addGoalHandler={addGoalHandler}
+          onCancel={() => setModalVisible(false)}
+          visible={modalVisible}
+        />
+        <FlatList
+          data={goals}
+          renderItem={(itemData) => {
+            return (
+              <GoalItem
+                text={itemData.item.text}
+                id={itemData.item.id}
+                onDeleteItem={deleteItem}
+              />
+            );
+          }}
+          keyExtractor={(item) => {
+            return item.id;
+          }}
+          style={{ marginTop: 40 }}
+        />
+      </View>
+    </>
   );
 }
 
